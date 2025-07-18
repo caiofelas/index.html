@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
+    <!-- Meta tag para responsividade: Essencial para que o site se adapte a diferentes dispositivos (celulares, tablets, desktops) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Velotex TV - Sua diversão conectada!</title>
+    <meta charset="UTF-8">
+
+    <!-- Title Tag: O título da sua página que aparece na aba do navegador e nos resultados de busca.
+         Deve ser conciso, único e incluir suas principais palavras-chave. -->
+    <title>Velotex TV | Canais, Filmes e Séries em HD e Full HD - Sua Diversão Conectada</title>
+
+    <!-- Meta Descrição: Um breve resumo da sua página que aparece nos resultados de busca.
+         Deve ser persuasiva, incluir palavras-chave e incentivar o clique. -->
+    <meta name="description" content="Assine Velotex TV e tenha acesso a mais de 200 canais, filmes e séries em HD e Full HD. Entretenimento completo para toda a família, com pagamentos via PIX e sem fidelidade.">
+
+    <!-- Palavras-chave: Embora menos relevantes hoje para ranqueamento direto, ainda ajudam a contextualizar. -->
+    <meta name="keywords" content="Velotex TV, TV online, canais, filmes, séries, streaming, HD, Full HD, IPTV, entretenimento, família, assinar TV, revendedor TV, planos TV, TV por assinatura, PIX, sem fidelidade">
+
+    <!-- Link para o Tailwind CSS CDN para estilização rápida e responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Link para a biblioteca Font Awesome para ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Importa a fonte Poppins do Google Fonts */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+
         /* Estilos base para o corpo, definindo fonte e comportamento de rolagem suave */
         body {
             font-family: 'Poppins', sans-serif;
@@ -17,12 +32,12 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
         }
-        
+
         /* Estilo para o efeito de sublinhado do logotipo (não usado no HTML atual, mas mantido) */
         .logo {
             position: relative;
         }
-        
+
         .logo::after {
             content: "";
             position: absolute;
@@ -33,30 +48,43 @@
             background: linear-gradient(90deg, #FF6C00, #FFA500); /* Usando o laranja existente para o logo */
             border-radius: 3px;
         }
-        
+
         /* Fundo gradiente para a seção hero */
         .hero-gradient {
             background: linear-gradient(135deg, #FC6A00 0%, #E35F00 100%); /* Novo laranja para a seção inicial e um tom mais escuro */
         }
-        
+
         /* Efeito hover para os cartões de recursos */
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: #FF6C00; /* Usando o laranja existente */
+            border-color: #FF6C00; /* Borda laranja ao passar o mouse */
         }
-        
+
         /* Posicionamento relativo para os contêineres de ícones dentro dos cartões de recursos */
         .feature-card div.relative {
             position: relative;
         }
-        
+
         /* Efeito hover para os cartões de plano */
         .plan-card:hover {
             transform: scale(1.03);
             box-shadow: 0 10px 25px rgba(255, 107, 0, 0.3); /* Mantendo o efeito de sombra existente */
+            border-color: #FF6C00; /* Borda laranja ao passar o mouse */
         }
-        
+
+        /* Estilos para os cards da seção "Como Funciona" */
+        .how-it-works-card:hover {
+            border-color: #FF6C00; /* Borda laranja ao passar o mouse */
+            transform: translateY(-5px); /* Efeito de leve levantamento */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+        }
+
+        /* Estilos para os itens do FAQ */
+        .faq-item:hover {
+            border-color: #FF6C00; /* Borda laranja ao passar o mouse */
+        }
+
         /* Estilos para o conteúdo do acordeão, inicialmente oculto */
         .accordion-content {
             max-height: 0;
@@ -69,6 +97,117 @@
             color: #FF6C00; /* Usando o laranja existente */
             font-weight: 600;
         }
+
+        /* Estilos para as bolhas animadas */
+        .bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Garante que as bolhas fiquem atrás do conteúdo */
+        }
+
+        .bubble {
+            position: absolute;
+            display: block;
+            list-style: none;
+            background: rgba(255, 255, 255, 0.15); /* Cor da bolha com transparência */
+            animation: animate 25s linear infinite; /* Animação principal */
+            bottom: -150px; /* Começa de baixo */
+            border-radius: 50%; /* Faz um círculo */
+        }
+
+        /* Variações para as bolhas (tamanho, posição, atraso, duração) */
+        .bubble:nth-child(1) {
+            left: 25%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+            left: 10%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 2s;
+            animation-duration: 12s;
+        }
+
+        .bubble:nth-child(3) {
+            left: 70%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+            left: 40%;
+            width: 60px;
+            height: 60px;
+            animation-delay: 0s;
+            animation-duration: 18s;
+        }
+
+        .bubble:nth-child(5) {
+            left: 65%;
+            width: 30px;
+            height: 30px;
+            animation-delay: 0s;
+        }
+
+        .bubble:nth-child(6) {
+            left: 75%;
+            width: 110px;
+            height: 110px;
+            animation-delay: 3s;
+        }
+
+        .bubble:nth-child(7) {
+            left: 35%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 7s;
+        }
+
+        .bubble:nth-child(8) {
+            left: 50%;
+            width: 25px;
+            height: 25px;
+            animation-delay: 15s;
+            animation-duration: 45s;
+        }
+
+        .bubble:nth-child(9) {
+            left: 20%;
+            width: 15px;
+            height: 15px;
+            animation-delay: 2s;
+            animation-duration: 35s;
+        }
+
+        .bubble:nth-child(10) {
+            left: 85%;
+            width: 150px;
+            height: 150px;
+            animation-delay: 0s;
+            animation-duration: 11s;
+        }
+
+        /* Animação das bolhas */
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -78,7 +217,7 @@
             <div class="flex items-center mr-8"> <!-- Adicionado mr-8 para espaçamento entre logo e menu -->
                 <span class="text-2xl font-bold text-[#FF6C00]">Velotex<span class="text-gray-800">TV</span></span>
             </div>
-            
+
             <nav class="hidden md:flex items-center space-x-8"> <!-- Ajustado space-x para 8 para espaçamento regular entre os itens -->
                 <a href="#home" class="nav-link font-medium hover:text-[#FF6C00] transition whitespace-nowrap">Início</a>
                 <a href="#features" class="nav-link font-medium hover:text-[#FF6C00] transition whitespace-nowrap">Recursos</a>
@@ -88,12 +227,12 @@
                 <a href="#faq" class="nav-link font-medium hover:text-[#FF6C00] transition whitespace-nowrap">FAQ</a>
                 <a href="#contact" class="nav-link font-medium hover:text-[#FF6C00] transition whitespace-nowrap">Contato</a>
             </nav>
-            
+
             <button class="md:hidden text-[#FF6C00] ml-auto" id="mobile-menu-button" aria-label="Alternar menu" aria-expanded="false"> <!-- Adicionado ml-auto para empurrar o botão para a direita em mobile -->
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </div>
-        
+
         <!-- Menu Móvel -->
         <div class="md:hidden hidden bg-white w-full py-2 px-4 shadow-md" id="mobile-menu" aria-hidden="true">
             <div class="flex flex-col space-y-3">
@@ -110,8 +249,23 @@
 
     <!-- Seção Hero -->
     <section id="home" class="hero-gradient text-white py-16 md:py-24 relative overflow-hidden">
-        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center">
+        <!-- Contêiner para as bolhas animadas -->
+        <div class="bubbles">
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+            <div class="bubble"></div>
+        </div>
+
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center justify-center relative z-10">
             <div class="md:w-1/2 mb-10 md:mb-0 text-center md:text-left">
+                <!-- H1: O título principal da sua página. Já estava bem otimizado! -->
                 <h1 class="text-4xl md:text-5xl font-bold mb-4">Velotex TV: Sua diversão conectada!</h1>
                 <p class="text-xl mb-8">Mais de 200 canais, filmes e séries para toda a família, tudo em HD e Full HD.</p>
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
@@ -119,12 +273,9 @@
                     <a href="#features" class="border-2 border-white text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-white hover:bg-opacity-10 transition" aria-label="Saiba Mais sobre nossos recursos">Saiba Mais</a>
                 </div>
             </div>
-            <!-- Espaço para a imagem promocional -->
+            <!-- A imagem da família foi removida daqui -->
             <div class="md:w-1/2 flex justify-center items-center mt-10 md:mt-0">
-                <img src="https://i.imgur.com/P1ol0nk.jpg" 
-                     onerror="this.onerror=null;this.src='https://placehold.co/600x400/FC6A00/ffffff?text=Imagem+Promocional+Placeholder'"
-                     alt="Família assistindo TV, imagem promocional da Velotex TV" 
-                     class="max-w-full h-auto rounded-lg">
+                <!-- Você pode adicionar outros elementos visuais aqui se desejar, ou deixar o espaço para as bolhas e o texto principal -->
             </div>
         </div>
     </section>
@@ -132,8 +283,9 @@
     <!-- Seção de Recursos -->
     <section id="features" class="py-16 bg-gray-50 relative overflow-hidden">
         <div class="container mx-auto px-4">
+            <!-- H2: Subtítulo para a seção de recursos. -->
             <h2 class="text-3xl font-bold text-center mb-12">Por que escolher a Velotex TV?</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Recurso 1: Mais de 200 canais -->
                 <div class="feature-card bg-white p-6 rounded-xl shadow-md transition duration-300 border border-gray-100">
@@ -143,7 +295,7 @@
                     <h3 class="text-xl font-bold text-center mb-3">+ de 200 canais</h3>
                     <p class="text-gray-600 text-center">Desfrute de um universo de entretenimento ilimitado com mais de 200 canais de TV, incluindo esportes, filmes, notícias e desenhos animados.</p>
                 </div>
-                
+
                 <!-- Recurso 2: Qualidade HD/Full HD -->
                 <div class="feature-card bg-white p-6 rounded-xl shadow-md transition duration-300 border border-gray-100">
                     <div class="relative w-16 h-16 bg-[#FFF1E6] rounded-full flex items-center justify-center mb-4 mx-auto">
@@ -152,7 +304,7 @@
                     <h3 class="text-xl font-bold text-center mb-3">Qualidade HD/Full HD</h3>
                     <p class="text-gray-600 text-center">Experimente seus programas favoritos com clareza cristalina e a melhor qualidade de imagem em HD e Full HD.</p>
                 </div>
-                
+
                 <!-- Recurso 3: Filmes e Séries On Demand -->
                 <div class="feature-card bg-white p-6 rounded-xl shadow-md transition duration-300 border border-gray-100">
                     <div class="relative w-16 h-16 bg-[#FFF1E6] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -168,12 +320,13 @@
     <!-- Seção de Planos -->
     <section id="plans" class="py-16 relative overflow-hidden">
         <div class="container mx-auto px-4">
+            <!-- H2: Subtítulo para a seção de planos. -->
             <h2 class="text-3xl font-bold text-center mb-4">Nossos Planos</h2>
             <p class="text-xl text-center text-gray-600 mb-12">Escolha o plano perfeito para sua diversão</p>
-            
+
             <div class="max-w-md mx-auto">
                 <!-- Plano Mensal -->
-                <div class="plan-card bg-white p-8 rounded-xl shadow-lg border-t-4 border-[#FF6C00] transition duration-300">
+                <div class="plan-card bg-white p-8 rounded-xl shadow-lg border border-gray-200 transition duration-300">
                     <h3 class="text-2xl font-bold mb-2">Plano Mensal</h3>
                     <div class="flex items-end mb-4">
                         <span class="text-4xl font-bold text-[#FF6C00]">R$ 25</span>
@@ -203,27 +356,28 @@
         </div>
     </section>
 
-    <!-- Seção Como Funciona (Placeholder - pode ser expandida depois) -->
+    <!-- Seção Como Funciona -->
     <section id="how-it-works" class="py-16 bg-gray-50 relative overflow-hidden">
         <div class="container mx-auto px-4 text-center">
+            <!-- H2: Subtítulo para a seção de como funciona. -->
             <h2 class="text-3xl font-bold mb-4">Como Funciona?</h2>
             <p class="text-xl text-gray-600 mb-12">É simples e rápido começar a usar a Velotex TV!</p>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-6 rounded-xl shadow-md bg-white">
+                <div class="how-it-works-card p-6 rounded-xl shadow-md bg-white border border-gray-200 transition duration-300">
                     <div class="w-16 h-16 bg-[#FFF1E6] rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-user-plus text-[#FF6C00] text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">1. Escolha seu Plano</h3>
                     <p class="text-gray-600">Selecione o plano mensal que melhor se adapta às suas necessidades.</p>
                 </div>
-                <div class="p-6 rounded-xl shadow-md bg-white">
+                <div class="how-it-works-card p-6 rounded-xl shadow-md bg-white border border-gray-200 transition duration-300">
                     <div class="w-16 h-16 bg-[#FFF1E6] rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-money-bill-wave text-[#FF6C00] text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-2">2. Pague via PIX</h3>
                     <p class="text-gray-600">Realize o pagamento de forma rápida e segura utilizando o PIX.</p>
                 </div>
-                <div class="p-6 rounded-xl shadow-md bg-white">
+                <div class="how-it-works-card p-6 rounded-xl shadow-md bg-white border border-gray-200 transition duration-300">
                     <div class="w-16 h-16 bg-[#FFF1E6] rounded-full flex items-center justify-center mx-auto mb-4">
                         <i class="fas fa-play-circle text-[#FF6C00] text-2xl"></i>
                     </div>
@@ -237,6 +391,7 @@
     <!-- Nova Seção: Seja um Revendedor -->
     <section id="reseller" class="py-16 bg-white relative overflow-hidden">
         <div class="container mx-auto px-4 text-center">
+            <!-- H2: Subtítulo para a seção de revendedor. -->
             <h2 class="text-3xl font-bold mb-4">Seja um Revendedor Velotex TV!</h2>
             <p class="text-xl text-gray-600 mb-8">Ganhe R$ 10 de comissão por cada cliente indicado que adquirir nosso serviço.</p>
             <a href="https://wa.me/5585988960589?text=Olá!%20Tenho%20interesse%20em%20ser%20um%20revendedor%20da%20Velotex%20TV." target="_blank" class="bg-[#FF6C00] hover:bg-[#E65F00] text-white font-bold py-3 px-6 rounded-lg text-center transition inline-block" aria-label="Quero ser Revendedor">Quero ser Revendedor!</a>
@@ -246,11 +401,12 @@
     <!-- Seção de Perguntas Frequentes (FAQ) -->
     <section id="faq" class="py-16 relative overflow-hidden">
         <div class="container mx-auto px-4 max-w-4xl">
+            <!-- H2: Subtítulo para a seção de FAQ. -->
             <h2 class="text-3xl font-bold text-center mb-12">Perguntas Frequentes</h2>
-            
+
             <div class="space-y-4">
                 <!-- Item FAQ 1: Como é feito o pagamento? (Movido para cima) -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <div class="faq-item border border-gray-200 rounded-lg overflow-hidden transition duration-300">
                     <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
                         <span class="font-medium text-left">Como é feito o pagamento?</span>
                         <i class="fas fa-chevron-down transition-transform"></i>
@@ -263,7 +419,7 @@
                 </div>
 
                 <!-- Item FAQ 2: Quantos dispositivos podem assistir simultaneamente? (Movido para cima) -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <div class="faq-item border border-gray-200 rounded-lg overflow-hidden transition duration-300">
                     <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
                         <span class="font-medium text-left">Quantos dispositivos podem assistir simultaneamente?</span>
                         <i class="fas fa-chevron-down transition-transform"></i>
@@ -274,9 +430,9 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Item FAQ 3: Quais dispositivos são compatíveis? -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <div class="faq-item border border-gray-200 rounded-lg overflow-hidden transition duration-300">
                     <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
                         <span class="font-medium text-left">Quais dispositivos são compatíveis com a Velotex TV?</span>
                         <i class="fas fa-chevron-down transition-transform"></i>
@@ -287,9 +443,9 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Item FAQ 4: Posso cancelar a qualquer momento? -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <div class="faq-item border border-gray-200 rounded-lg overflow-hidden transition duration-300">
                     <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
                         <span class="font-medium text-left">Posso cancelar a qualquer momento?</span>
                         <i class="fas fa-chevron-down transition-transform"></i>
@@ -300,9 +456,9 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Item FAQ 5: Há algum tipo de fidelidade? -->
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <div class="faq-item border border-gray-200 rounded-lg overflow-hidden transition duration-300">
                     <button class="faq-question w-full flex justify-between items-center p-4 bg-gray-50 hover:bg-gray-100 transition">
                         <span class="font-medium text-left">Há algum tipo de fidelidade?</span>
                         <i class="fas fa-chevron-down transition-transform"></i>
@@ -320,8 +476,9 @@
     <!-- Seção de Contato -->
     <section id="contact" class="py-16 bg-[#FFF1E6] relative overflow-hidden">
         <div class="container mx-auto px-4">
+            <!-- H2: Subtítulo para a seção de contato. -->
             <h2 class="text-3xl font-bold text-center mb-12">Fale Conosco</h2>
-            
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                 <div>
                     <h3 class="text-xl font-bold mb-4">Informações de Contato</h3>
@@ -342,7 +499,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div>
                     <h3 class="text-xl font-bold mb-4">Envie sua Mensagem</h3>
                     <form id="contact-form" action="https://formsubmit.co/contato.velotextv@gmail.com" method="POST" class="space-y-4">
@@ -381,7 +538,7 @@
                     <span class="text-2xl font-bold mb-4 block">Velotex<span class="text-white">TV</span></span>
                     <p class="text-gray-400">Sua diversão conectada com mais de 200 canais, filmes e séries para toda a família.</p>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-bold mb-4">Links Rápidos</h4>
                     <ul class="space-y-2">
@@ -394,7 +551,7 @@
                         <li><a href="#contact" class="text-gray-400 hover:text-white transition">Contato</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-bold mb-4">Legal</h4>
                     <ul class="space-y-2">
@@ -403,7 +560,7 @@
                         <li><a href="#" class="text-gray-400 hover:text-white transition">Cookies</a></li>
                     </ul>
                 </div>
-                
+
                 <div>
                     <h4 class="text-lg font-bold mb-4">Redes Sociais</h4>
                     <div class="flex space-x-4">
@@ -422,7 +579,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
                 <p>&copy; 2025 Velotex TV. Todos os direitos reservados.</p>
             </div>
@@ -498,7 +655,7 @@
             mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
             mobileMenu.setAttribute('aria-hidden', isExpanded);
         });
-        
+
         // Fechar menu móvel ao clicar em um link dentro dele
         mobileNavLinks.forEach(link => {
             link.addEventListener('click', () => {
@@ -513,7 +670,7 @@
             question.addEventListener('click', () => {
                 const answer = question.nextElementSibling;
                 const icon = question.querySelector('i');
-                
+
                 // Fechar todos os outros FAQs abertos
                 faqQuestions.forEach(q => {
                     if (q !== question) {
@@ -522,7 +679,7 @@
                         q.querySelector('i').classList.add('fa-chevron-down');
                     }
                 });
-                
+
                 // Alternar o FAQ atual
                 if (answer.style.maxHeight) {
                     answer.style.maxHeight = null;
@@ -531,57 +688,60 @@
                 } else {
                     answer.style.maxHeight = answer.scrollHeight + 'px';
                     icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up');
+                    icon.classList.add('fa-chevron-up'); // Corrigido: Adicionar 'fa-chevron-up' ao abrir
                 }
             });
         });
-        
-        // Manipulador de envio de formulário para o formulário de contato
-        if (contactForm) {
-            contactForm.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                // Mostrar estado de carregamento
-                submitButton.disabled = true;
-                buttonText.textContent = 'Enviando...';
-                spinner.classList.remove('hidden');
-                formMessage.textContent = ''; // Limpar mensagens anteriores
-                formMessage.classList.remove('text-green-600', 'text-red-600'); // Limpar estilos anteriores
-                
-                try {
-                    const formData = new FormData(contactForm);
-                    const response = await fetch(contactForm.action, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'Accept': 'application/json'
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        formMessage.textContent = 'Mensagem enviada com sucesso! Em breve entraremos em contato.';
-                        formMessage.classList.add('text-green-600');
-                        contactForm.reset();
-                    } else {
-                        throw new Error('Erro ao enviar mensagem. Tente novamente.');
-                    }
-                } catch (error) {
-                    formMessage.textContent = error.message;
-                    formMessage.classList.add('text-red-600');
-                    console.error('Error:', error);
-                } finally {
-                    setTimeout(() => {
-                        buttonText.textContent = 'Enviar Mensagem';
-                        spinner.classList.add('hidden');
-                        submitButton.disabled = false;
-                    }, 3000);
-                }
-            });
-        }
 
-        // Visibilidade do botão Voltar ao Topo e manipulador de clique
+        // Funcionalidade do formulário de contato
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Previne o envio padrão do formulário
+
+            // Mostra o spinner e desabilita o botão
+            buttonText.classList.add('hidden');
+            spinner.classList.remove('hidden');
+            submitButton.disabled = true;
+            formMessage.textContent = ''; // Limpa mensagens anteriores
+            formMessage.classList.remove('text-green-600', 'text-red-600');
+
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' // Importante para FormSubmit.co retornar JSON
+                    }
+                });
+
+                if (response.ok) {
+                    formMessage.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
+                    formMessage.classList.add('text-green-600');
+                    contactForm.reset(); // Limpa o formulário
+                } else {
+                    const data = await response.json();
+                    if (data.message) {
+                        formMessage.textContent = `Erro ao enviar mensagem: ${data.message}`;
+                    } else {
+                        formMessage.textContent = 'Ocorreu um erro ao enviar sua mensagem. Tente novamente.';
+                    }
+                    formMessage.classList.add('text-red-600');
+                }
+            } catch (error) {
+                console.error('Erro de rede ou envio:', error);
+                formMessage.textContent = 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.';
+                formMessage.classList.add('text-red-600');
+            } finally {
+                // Esconde o spinner e reabilita o botão
+                buttonText.classList.remove('hidden');
+                spinner.classList.add('hidden');
+                submitButton.disabled = false;
+            }
+        });
+
+        // Mostrar/Esconder botão Voltar ao Topo
         window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
+            if (window.pageYOffset > 300) { // Mostra o botão após rolar 300px
                 backToTopButton.classList.remove('opacity-0', 'invisible');
                 backToTopButton.classList.add('opacity-100', 'visible');
             } else {
@@ -589,26 +749,12 @@
                 backToTopButton.classList.add('opacity-0', 'invisible');
             }
         });
-        
+
+        // Rolagem suave para o topo
         backToTopButton.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
-            });
-        });
-        
-        // Rolagem suave para links de âncora
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
             });
         });
     </script>
