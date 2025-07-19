@@ -270,6 +270,7 @@
                 <p class="text-xl mb-8">Mais de 200 canais, filmes e séries para toda a família, tudo em HD e Full HD.</p>
                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 justify-center md:justify-start">
                     <a href="#plans" class="bg-white text-[#FF6C00] font-bold py-3 px-6 rounded-lg text-center hover:bg-gray-100 transition" aria-label="Assine Agora">Assine Agora!</a>
+                    <a href="https://wa.me/5585988960589?text=Olá!%20Tenho%20interesse%20no%20teste%20grátis%20de%203%20horas%20da%20Velotex%20TV." target="_blank" class="bg-blue-500 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-blue-600 transition" aria-label="Teste Grátis">Teste Grátis por 3h</a>
                     <a href="#features" class="border-2 border-white text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-white hover:bg-opacity-10 transition" aria-label="Saiba Mais sobre nossos recursos">Saiba Mais</a>
                 </div>
             </div>
@@ -573,190 +574,164 @@
                         <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF6C00] transition" aria-label="Twitter">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-[#FF6C00] transition" aria-label="YouTube">
-                            <i class="fab fa-youtube"></i>
-                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 Velotex TV. Todos os direitos reservados.</p>
+            <div class="text-center text-gray-500 mt-8 pt-8 border-t border-gray-700">
+                <p>&copy; 2024 Velotex TV. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Botão Voltar ao Topo -->
-    <button id="back-to-top" class="fixed bottom-6 right-6 w-12 h-12 bg-[#FF6C00] text-white rounded-full shadow-lg flex items-center justify-center opacity-0 invisible transition-all" aria-label="Voltar ao topo">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script>
-        // Obter referências aos elementos DOM
+        // JavaScript para funcionalidades interativas
+
+        // 1. Funcionalidade do Menu Móvel
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                mobileMenu.setAttribute('aria-hidden', isExpanded);
+            });
+
+            // Fecha o menu móvel ao clicar em um link de navegação
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                });
+            });
+        }
+
+        // 2. Funcionalidade do Acordeão (FAQ)
         const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const content = question.nextElementSibling; // Pega o elemento irmão seguinte (accordion-content)
+                const icon = question.querySelector('.fa-chevron-down'); // Pega o ícone de chevron
+
+                // Fecha todos os outros acordeões abertos
+                faqQuestions.forEach(otherQuestion => {
+                    if (otherQuestion !== question) {
+                        const otherContent = otherQuestion.nextElementSibling;
+                        const otherIcon = otherQuestion.querySelector('.fa-chevron-down');
+                        otherContent.style.maxHeight = null;
+                        otherIcon.classList.remove('rotate-180');
+                    }
+                });
+
+                // Alterna o acordeão clicado
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null; // Fecha o acordeão
+                    icon.classList.remove('rotate-180'); // Gira o ícone de volta
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px'; // Abre o acordeão
+                    icon.classList.add('rotate-180'); // Gira o ícone
+                }
+            });
+        });
+
+        // 3. Funcionalidade do Formulário de Contato
         const contactForm = document.getElementById('contact-form');
         const submitButton = document.getElementById('submit-button');
         const buttonText = document.getElementById('button-text');
         const spinner = document.getElementById('spinner');
         const formMessage = document.getElementById('form-message');
-        const backToTopButton = document.getElementById('back-to-top');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Previne o envio padrão do formulário
+
+                // Mostra o spinner e desabilita o botão
+                buttonText.classList.add('hidden');
+                spinner.classList.remove('hidden');
+                submitButton.disabled = true;
+                formMessage.textContent = ''; // Limpa mensagens anteriores
+
+                const formData = new FormData(contactForm);
+                const object = {};
+                formData.forEach((value, key) => {
+                    if (key !== '_captcha') { // Não inclua o campo _captcha no objeto de dados
+                        object[key] = value;
+                    }
+                });
+                const json = JSON.stringify(object);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: contactForm.method,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: json
+                    });
+
+                    if (response.ok) {
+                        formMessage.textContent = 'Mensagem enviada com sucesso! Em breve entraremos em contato.';
+                        formMessage.classList.remove('text-red-500');
+                        formMessage.classList.add('text-green-500');
+                        contactForm.reset(); // Limpa o formulário
+                    } else {
+                        // Tenta ler a resposta para uma mensagem de erro mais específica
+                        const errorData = await response.json();
+                        formMessage.textContent = `Erro ao enviar mensagem: ${errorData.message || 'Tente novamente mais tarde.'}`;
+                        formMessage.classList.remove('text-green-500');
+                        formMessage.classList.add('text-red-500');
+                    }
+                } catch (error) {
+                    formMessage.textContent = 'Ocorreu um erro na conexão. Por favor, tente novamente.';
+                    formMessage.classList.remove('text-green-500');
+                    formMessage.classList.add('text-red-500');
+                    console.error('Erro de envio do formulário:', error);
+                } finally {
+                    // Esconde o spinner e reabilita o botão
+                    buttonText.classList.remove('hidden');
+                    spinner.classList.add('hidden');
+                    submitButton.disabled = false;
+                }
+            });
+        }
+
+        // 4. Funcionalidade de Link de Navegação Ativo
         const navLinks = document.querySelectorAll('.nav-link');
-        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+        const sections = document.querySelectorAll('section[id]');
 
-        // Função para definir o link de navegação ativo com base na posição de rolagem
-        function setActiveNavLink() {
-            const sections = document.querySelectorAll('section[id]');
-            let currentActive = '';
-
+        function updateActiveNavLink() {
+            let currentActiveSectionId = '';
             sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100; // Offset para o cabeçalho fixo
-                const sectionHeight = section.clientHeight;
-                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
-                    currentActive = section.id;
+                const sectionTop = section.offsetTop - document.querySelector('header').offsetHeight; // Ajusta para a altura do cabeçalho fixo
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (window.scrollY >= sectionTop && window.scrollY < sectionBottom) {
+                    currentActiveSectionId = section.id;
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === currentActive) {
+                if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
                     link.classList.add('active');
                 }
             });
-            // Também atualizar os links do menu móvel
+
             mobileNavLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === currentActive) {
+                if (link.getAttribute('href') === `#${currentActiveSectionId}`) {
                     link.classList.add('active');
                 }
             });
         }
 
-        // Ouvinte de evento para rolagem para atualizar o link de navegação ativo
-        window.addEventListener('scroll', setActiveNavLink);
-        // Definir link ativo no carregamento da página
-        document.addEventListener('DOMContentLoaded', setActiveNavLink);
-
-
-        // Fechar menu móvel ao clicar fora
-        document.addEventListener('click', (e) => {
-            if (!mobileMenu.contains(e.target) && !mobileMenuButton.contains(e.target) && !mobileMenu.classList.contains('hidden')) {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-                mobileMenu.setAttribute('aria-hidden', 'true');
-            }
-        });
-
-        // Alternar Menu Móvel
-        mobileMenuButton.addEventListener('click', () => {
-            const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
-            mobileMenu.classList.toggle('hidden');
-            mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
-            mobileMenu.setAttribute('aria-hidden', isExpanded);
-        });
-
-        // Fechar menu móvel ao clicar em um link dentro dele
-        mobileNavLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-                mobileMenu.setAttribute('aria-hidden', 'true');
-            });
-        });
-
-        // Funcionalidade do Acordeão FAQ
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-
-                // Fechar todos os outros FAQs abertos
-                faqQuestions.forEach(q => {
-                    if (q !== question) {
-                        q.nextElementSibling.style.maxHeight = null;
-                        q.querySelector('i').classList.remove('fa-chevron-up');
-                        q.querySelector('i').classList.add('fa-chevron-down');
-                    }
-                });
-
-                // Alternar o FAQ atual
-                if (answer.style.maxHeight) {
-                    answer.style.maxHeight = null;
-                    icon.classList.remove('fa-chevron-up');
-                    icon.classList.add('fa-chevron-down');
-                } else {
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
-                    icon.classList.remove('fa-chevron-down');
-                    icon.classList.add('fa-chevron-up'); // Corrigido: Adicionar 'fa-chevron-up' ao abrir
-                }
-            });
-        });
-
-        // Funcionalidade do formulário de contato
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Previne o envio padrão do formulário
-
-            // Mostra o spinner e desabilita o botão
-            buttonText.classList.add('hidden');
-            spinner.classList.remove('hidden');
-            submitButton.disabled = true;
-            formMessage.textContent = ''; // Limpa mensagens anteriores
-            formMessage.classList.remove('text-green-600', 'text-red-600');
-
-            try {
-                const formData = new FormData(contactForm);
-                const response = await fetch(contactForm.action, {
-                    method: contactForm.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json' // Importante para FormSubmit.co retornar JSON
-                    }
-                });
-
-                if (response.ok) {
-                    formMessage.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
-                    formMessage.classList.add('text-green-600');
-                    contactForm.reset(); // Limpa o formulário
-                } else {
-                    const data = await response.json();
-                    if (data.message) {
-                        formMessage.textContent = `Erro ao enviar mensagem: ${data.message}`;
-                    } else {
-                        formMessage.textContent = 'Ocorreu um erro ao enviar sua mensagem. Tente novamente.';
-                    }
-                    formMessage.classList.add('text-red-600');
-                }
-            } catch (error) {
-                console.error('Erro de rede ou envio:', error);
-                formMessage.textContent = 'Não foi possível conectar ao servidor. Verifique sua conexão e tente novamente.';
-                formMessage.classList.add('text-red-600');
-            } finally {
-                // Esconde o spinner e reabilita o botão
-                buttonText.classList.remove('hidden');
-                spinner.classList.add('hidden');
-                submitButton.disabled = false;
-            }
-        });
-
-        // Mostrar/Esconder botão Voltar ao Topo
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) { // Mostra o botão após rolar 300px
-                backToTopButton.classList.remove('opacity-0', 'invisible');
-                backToTopButton.classList.add('opacity-100', 'visible');
-            } else {
-                backToTopButton.classList.remove('opacity-100', 'visible');
-                backToTopButton.classList.add('opacity-0', 'invisible');
-            }
-        });
-
-        // Rolagem suave para o topo
-        backToTopButton.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
+        // Chama a função ao carregar a página e ao rolar
+        window.addEventListener('scroll', updateActiveNavLink);
+        window.addEventListener('load', updateActiveNavLink);
     </script>
 </body>
 </html>
